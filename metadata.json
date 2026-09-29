@@ -1,0 +1,6 @@
+{
+  "name": "Dativo Gomes | Imóveis de Alto Padrão",
+  "description": "Encontre o imóvel que faz sentido para você. Atendimento especializado em imóveis de alto padrão e investimentos com Dativo Gomes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
