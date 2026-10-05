@@ -139,8 +139,9 @@ export default function App() {
   // Estado para modal de vídeo em tela cheia / expandido
   const [expandedVideo, setExpandedVideo] = useState<{ src: string; title: string } | null>(null);
 
-  // Imagem enviada: "Dativo Gomes Banner.png"
+  // Imagem enviada: "Dativo Gomes Banner.png" (Desktop) e "dativogomes.vertical.png" (Mobile e Tablet)
   const heroImageSrc = encodeURI('/Dativo Gomes Banner.png');
+  const heroMobileImageSrc = encodeURI('/dativogomes.vertical.png');
 
   // Configuração centralizada do WhatsApp de Dativo Gomes
   const DATIVO_WHATSAPP_PHONE = '5562993302090'; // Número oficial: +55 62 99330-2090
@@ -277,116 +278,223 @@ export default function App() {
     <div className="relative w-full bg-[#050a1a] text-white flex flex-col overflow-x-hidden">
       
       {/* ============================================================ */}
-      {/* HERO SECTION (PRESERVADO RIGOROSAMENTE SEM ALTERAÇÕES)        */}
+      {/* 1. HERO DESKTOP & NOTEBOOK: IMAGEM 1 HORIZONTAL              */}
+      {/* (Texto sobreposto ao lado esquerdo, Dativo ao lado direito)  */}
+      {/* Exibido a partir de telas médias/computadores (hidden md:flex)*/}
       {/* ============================================================ */}
-      <header className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden">
-        {/* FOTO ORIGINAL EM TODO O LAYOUT DO BANNER PRINCIPAL */}
+      <header className="hidden md:flex relative min-h-[600px] lg:min-h-screen w-full flex-col justify-center overflow-hidden bg-[#000003]">
+        {/* Banner horizontal original completo em alta resolução */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
           <motion.img
-            initial={{ scale: 1.03, opacity: 0 }}
+            initial={{ scale: 1.02, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             src={heroImageSrc}
             alt="Dativo Gomes"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-[center_center] lg:object-[center_top] filter brightness-[1.0] contrast-[1.0]"
+            className="w-full h-full object-cover object-right lg:object-center"
           />
 
-          {/* Gradiente sutil à esquerda para garantir legibilidade dos textos sem cobrir a foto */}
+          {/* Gradiente levíssimo no extremo esquerdo apenas para fusão periférica suave */}
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-[#050a1a]/95 via-[#060e24]/75 via-42% md:via-[#091535]/35 md:via-55% to-transparent pointer-events-none" 
+            className="absolute inset-0 bg-gradient-to-r from-[#000003] via-[#000003]/80 via-30% md:via-[#000003]/30 md:via-48% to-transparent pointer-events-none" 
           />
-
-          {/* Gradiente vertical inferior suave */}
           <div 
-            className="absolute inset-0 bg-gradient-to-t from-[#040712]/60 via-transparent via-50% to-[#050a1a]/30 pointer-events-none" 
-          />
-
-          {/* Camada para telas mobile */}
-          <div 
-            className="absolute inset-0 bg-[#050a1a]/55 md:bg-transparent pointer-events-none" 
+            className="absolute inset-0 bg-gradient-to-t from-[#000003]/70 via-transparent via-25% to-transparent pointer-events-none" 
           />
         </div>
 
-        {/* CONTEÚDO PRINCIPAL (LADO ESQUERDO): Textos, Título e CTAs */}
-        <main className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-16 sm:py-20 lg:py-24 xl:py-28 flex items-center min-h-screen">
-        <div className="w-full max-w-xl lg:max-w-[580px] xl:max-w-[640px]">
-          
-          {/* 1. Identificação: DATIVO GOMES */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3.5 mb-6 sm:mb-8"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#2563eb] shadow-[0_0_14px_rgba(37,99,235,0.95)]" />
-            <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-slate-100 font-sans-body">
-              Dativo Gomes
-            </span>
-            <span className="h-[1px] w-14 bg-gradient-to-r from-[#2563eb] via-slate-500/50 to-transparent" />
-          </motion.div>
-
-          {/* 2. Título principal em destaque dominante */}
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif-display text-4xl sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] font-medium leading-[1.08] tracking-tight text-white mb-6 sm:mb-8 drop-shadow-[0_4px_20px_rgba(0,0,0,0.85)]"
-            style={{ textWrap: 'balance' }}
-          >
-            Encontre o imóvel que faz sentido para você.
-          </motion.h1>
-
-          {/* 3. Subtítulo elegante com amplo respiro visual */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="font-sans-body text-base sm:text-lg lg:text-xl text-slate-200/95 font-light leading-relaxed max-w-lg mb-10 sm:mb-12 drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]"
-          >
-            Atendimento especializado para quem busca comprar, vender ou investir em imóveis.
-          </motion.p>
-
-          {/* 4. Dois CTAs: "Ver oportunidades" e "Falar com Dativo" */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
-          >
-            {/* CTA Primário: Ver oportunidades (Azul Royal) */}
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('oportunidades');
-                if (el) {
-                  el.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  setActiveModal('opportunities');
-                }
-              }}
-              className="group relative inline-flex items-center justify-center gap-3.5 px-8 py-4 bg-[#1d4ed8] hover:bg-[#2563eb] active:bg-[#1e40af] text-white text-base font-medium rounded-sm shadow-[0_8px_24px_rgba(29,78,216,0.45)] hover:shadow-[0_12px_36px_rgba(37,99,235,0.6)] transition-all duration-200 cursor-pointer overflow-hidden whitespace-nowrap"
+        {/* CONTEÚDO DO DESKTOP: SOBREPOSTO AO LADO ESQUERDO */}
+        <main className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-16 sm:py-20 lg:py-24 xl:py-28 flex items-center min-h-[600px] lg:min-h-screen">
+          <div className="w-full max-w-xl lg:max-w-[560px] xl:max-w-[620px]">
+            
+            {/* 1. Identificação: DATIVO GOMES */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center gap-3.5 mb-5 lg:mb-7"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-              <span>Ver oportunidades</span>
-              <ArrowUpRight className="w-5 h-5 text-white/95 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-            </button>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#2563eb] shadow-[0_0_14px_rgba(37,99,235,0.95)]" />
+              <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-slate-100 font-sans-body">
+                Dativo Gomes
+              </span>
+              <span className="h-[1px] w-14 bg-gradient-to-r from-[#2563eb] via-slate-500/50 to-transparent" />
+            </motion.div>
 
-            {/* CTA Secundário: Falar com Dativo (WhatsApp) */}
-            <a
-              href={DATIVO_DEFAULT_WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#080e1e]/90 hover:bg-[#101b38] text-slate-100 hover:text-white text-base font-medium rounded-sm border border-slate-600/70 hover:border-slate-400 backdrop-blur-md shadow-lg transition-all duration-200 cursor-pointer whitespace-nowrap"
+            {/* 2. Título principal em destaque dominante */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif-display text-3xl sm:text-4xl lg:text-[3.5rem] xl:text-[4.1rem] font-medium leading-[1.08] tracking-tight text-white mb-5 lg:mb-7 drop-shadow-[0_4px_20px_rgba(0,0,0,0.85)]"
+              style={{ textWrap: 'balance' }}
             >
-              <MessageSquare className="w-4 h-4 text-[#3b82f6] group-hover:text-white transition-colors" />
-              <span>Falar com Dativo</span>
-            </a>
-          </motion.div>
+              Encontre o imóvel que faz sentido para você.
+            </motion.h1>
 
-        </div>
-      </main>
+            {/* 3. Subtítulo elegante */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="font-sans-body text-base lg:text-lg xl:text-xl text-slate-200 font-light leading-relaxed max-w-[460px] lg:max-w-[480px] mb-8 lg:mb-10 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]"
+            >
+              Atendimento especializado para quem busca comprar,
+              <br className="hidden sm:inline" />
+              {' '}vender ou investir em imóveis.
+            </motion.p>
+
+            {/* 4. Dois CTAs: "Ver oportunidades" e "Falar com Dativo" */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
+            >
+              {/* CTA Primário: Ver oportunidades (Azul Royal) */}
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('oportunidades');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    setActiveModal('opportunities');
+                  }
+                }}
+                className="group relative inline-flex items-center justify-center gap-3.5 px-8 py-3.5 lg:py-4 bg-[#1d4ed8] hover:bg-[#2563eb] active:bg-[#1e40af] text-white text-base font-medium rounded-sm shadow-[0_8px_24px_rgba(29,78,216,0.45)] hover:shadow-[0_12px_36px_rgba(37,99,235,0.6)] transition-all duration-200 cursor-pointer overflow-hidden whitespace-nowrap"
+              >
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                <span>Ver oportunidades</span>
+                <ArrowUpRight className="w-5 h-5 text-white/95 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+              </button>
+
+              {/* CTA Secundário: Falar com Dativo (WhatsApp) */}
+              <a
+                href={DATIVO_DEFAULT_WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-3.5 lg:py-4 bg-[#080e1e]/90 hover:bg-[#101b38] text-slate-100 hover:text-white text-base font-medium rounded-sm border border-slate-600/70 hover:border-slate-400 backdrop-blur-md shadow-lg transition-all duration-200 cursor-pointer whitespace-nowrap"
+              >
+                <MessageSquare className="w-4 h-4 text-[#3b82f6] group-hover:text-white transition-colors" />
+                <span>Falar com Dativo</span>
+              </a>
+            </motion.div>
+
+          </div>
+        </main>
       </header>
+
+      {/* ============================================================ */}
+      {/* 2. HERO MOBILE & DISPOSITIVOS MENORES: IMAGEM 2 VERTICAL     */}
+      {/* (Imagem perfeitamente alinhada acima do conteúdo de texto)  */}
+      {/* Exibido EXCLUSIVAMENTE em celulares (md:hidden)              */}
+      {/* ============================================================ */}
+      <section className="md:hidden relative w-full flex flex-col items-center bg-[#000003] pt-4 pb-8 px-5 overflow-hidden">
+        
+        {/* BLOCO CENTRAL UNIFICADO: FLUXO VERTICAL CONTÍNUO E CONSISTENTE */}
+        <div className="w-full max-w-sm mx-auto flex flex-col items-center text-center">
+          
+          {/* IMAGEM 2: VERTICAL PARA CELULAR NO TOPO */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[280px] xs:max-w-[320px] mx-auto mb-2.5"
+          >
+            <div className="relative group mx-auto">
+              {/* Brilho sutil de realce atrás do retrato */}
+              <div className="absolute -inset-1 bg-gradient-to-b from-[#2563eb]/20 via-[#1d4ed8]/10 to-transparent rounded-2xl blur-sm pointer-events-none" />
+              
+              {/* Moldura da imagem vertical: agora focada com perfeição no Dativo sem área vazia */}
+              <div className="relative overflow-hidden rounded-2xl bg-[#09142e] border border-[#1e3a78]/40 shadow-[0_10px_28px_rgba(0,0,0,0.85)]">
+                <img
+                  src={heroMobileImageSrc}
+                  alt="Dativo Gomes — Especialista em Investimentos Imobiliários"
+                  className="w-full h-auto object-cover block mx-auto"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CONTEÚDO DE TEXTO: PERFEITAMENTE ALINHADO LOGO ABAIXO DA IMAGEM */}
+          <div className="w-full flex flex-col items-center">
+            
+            {/* Identificação: Dativo Gomes */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center justify-center gap-2 mb-2"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] shadow-[0_0_10px_rgba(37,99,235,0.9)]" />
+              <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate-200 font-sans-body">
+                Dativo Gomes
+              </span>
+              <span className="h-[1px] w-8 bg-gradient-to-r from-[#2563eb] to-transparent" />
+            </motion.div>
+
+            {/* Título Principal */}
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif-display text-[1.65rem] xs:text-[1.8rem] font-medium leading-[1.18] tracking-tight text-white mb-2"
+              style={{ textWrap: 'balance' }}
+            >
+              Encontre o imóvel que faz sentido para você.
+            </motion.h1>
+
+            {/* Subtítulo */}
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="font-sans-body text-xs xs:text-sm text-slate-300 font-light leading-relaxed max-w-[310px] mb-4"
+            >
+              Atendimento especializado para quem busca comprar, vender ou investir em imóveis.
+            </motion.p>
+
+            {/* Botões de Ação */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-[310px] flex flex-col items-stretch justify-center gap-2.5"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('oportunidades');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    setActiveModal('opportunities');
+                  }
+                }}
+                className="group relative inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-[#1d4ed8] hover:bg-[#2563eb] text-white text-sm font-medium rounded-sm shadow-[0_6px_20px_rgba(29,78,216,0.4)] transition-all duration-200 cursor-pointer overflow-hidden"
+              >
+                <span>Ver oportunidades</span>
+                <ArrowUpRight className="w-4 h-4 text-white/95" />
+              </button>
+
+              <a
+                href={DATIVO_DEFAULT_WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#080e1e]/90 hover:bg-[#101b38] text-slate-100 text-sm font-medium rounded-sm border border-slate-600/70 shadow-md transition-all duration-200 cursor-pointer"
+              >
+                <MessageSquare className="w-4 h-4 text-[#3b82f6]" />
+                <span>Falar com Dativo</span>
+              </a>
+            </motion.div>
+
+          </div>
+
+        </div>
+      </section>
 
       {/* ============================================================ */}
       {/* FAIXAS EDITORIAIS DE TRANSIÇÃO                              */}
